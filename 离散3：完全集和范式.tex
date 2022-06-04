@@ -1,0 +1,320 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	tfamily,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第三次作业}
+\author{贠启豪 19375168}
+\date{\today}
+
+\begin{document}
+   \maketitle
+   \begin{enumerate}
+        \item 证明以下联结词集合是极小完全集。
+        \begin{enumerate}
+           \item $\{0 , \rightarrow\}$
+           
+           证明：由于$\neg p\Leftrightarrow p\rightarrow 0$,且$\{\neg , \rightarrow\}$
+           是完全集，所以$\{0, \rightarrow \}$是完全集。
+
+           如果任取由$\{0\}$生成的公式$A$，则$A\Leftrightarrow 0$,对
+           于真值赋值$v(p/0),v(\neg p)=1,v(A)=0$，所以$\{0\}$不是完全集。
+
+           如果任取只由$p$和$\{\rightarrow \}$生成的公式A，对于
+           真值赋值$v(p/1),v(A)=1,v(\neg p)=0$，所以$\{\rightarrow \}$
+           不是完全集。
+
+           所以$\{0 , \rightarrow\}$是极小完全集。
+
+           \item $\{\oplus , \rightarrow\}$
+           
+            证明：由于$\neg p\Leftrightarrow p\oplus 1\Leftrightarrow p\oplus(p\rightarrow p)$，且$\neg,\rightarrow$是完全集，所以$\{\oplus,\rightarrow\}$是完全集。
+
+            任取由$\{\oplus \}$和$p$生成，而且p出现了偶数次的公式$A$，对于真值赋值
+            $v(p/1),有v(A)=1,v(\neg p)=0$，所以$\{\oplus \}$不是完全集。
+
+            如果任取只由$p$和$\{\rightarrow \}$生成的公式A，对于
+           真值赋值$v(p/1),v(A)=1,v(\neg p)=0$，所以$\{\rightarrow \}$
+           不是完全集。
+
+           所以$\{\oplus ,\rightarrow\}$是极小完全集。
+
+           \item $\{\oplus , \wedge ,  \leftrightarrow \}$
+           
+           证明：由于$\neg p\Leftrightarrow p\oplus 1\Leftrightarrow p\oplus (p\leftrightarrow p)$,
+           而且$\{\neg,\wedge \}$是完全集，所以$\{\oplus , \wedge ,  \leftrightarrow \}$
+           是完全集。
+
+           任取由$\{\oplus \wedge\}$和命题变元$p$生成的公式A，对于真值赋值
+           $v(p/0),v(A)=0,v(\neg p)=1$,所以$\{\oplus, \wedge\}$不是完全集。
+
+           任取由$\{\wedge \oplus\}$和命题变元$p$生成的公式$A$，对于真值赋值
+           $v(p/1),v(A)=1,v(\neg p)=0$，所以$\{\wedge, \oplus\}$不是完全集。
+
+           $\{\oplus \leftrightarrow\}$不是完全集。
+
+           所以$\{\oplus,\wedge,\leftrightarrow\}$是极小完全集。
+           
+           \item $\{\oplus, \vee ,  \leftrightarrow \}$
+           
+           证明：由于$\neg p\Leftrightarrow p\oplus 1\Leftrightarrow p\oplus (p\leftrightarrow p)$,
+           而且$\{\neg,\vee \}$是完全集，所以$\{\oplus , \vee ,  \leftrightarrow \}$
+           是完全集。
+
+           对于任意由$\{\oplus,\vee\}$和命题变元$p$生成的公式$A$,对于真值赋值
+           $v(p/0),v(A)=0,v(\neg p)=1$，所以$\{\oplus,\vee\}$不是完全集。
+
+           对于任意由$\{\vee,\leftrightarrow\}$和命题变元$p$生成的公式A，对于
+           真值赋值$v(p/1),v(A)=1,v(\neg p)=0$，所以$\{\vee,\leftrightarrow\}$
+           不是完全集。
+
+        
+        
+        \end{enumerate}
+        \item  证明以下联结词集合不是完全集。
+        \begin{enumerate}
+           \item $\{\wedge, \vee, \rightarrow, \leftrightarrow\}$
+           
+           对于任意由上述集合和命题变元$p$形成的公式$A$,
+           对于真值赋值$v(p/1),有v(A)=1,v(\neg p)=0$，所以上述集合不是
+           完全集。
+           
+           \item $ \{\oplus , \wedge, \vee\}$
+           
+           对于任意由上述集合和命题变元$p$形成的公式$A$,
+           对于真值赋值$v(p/0),有v(A)=0,v(\neg p)=1$，所以上述集合不是
+           完全集。
+        \end{enumerate}    
+        \item 二元联结词­­↑（称为“与非”）和↓（称为“或非”）的真值表如下。
+        
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|cccc|}
+                \hline
+                $p$ & $q$ & $p \uparrow q$ & $p\downarrow q$\\
+                \hline
+                0 & 0 & 1 & 1\\
+                \hline
+                0 & 1 & 1 & 0\\
+                \hline
+                1 & 0 & 1 & 0\\
+                \hline
+                1 & 1 & 0 & 0\\
+                \hline
+            \end{tabular}
+        \end{table}
+        证明：
+        \begin{enumerate}
+            \item $\{\uparrow \}$是完全集
+            
+            证明：由于$\neg p\Leftrightarrow (p \uparrow p),p\wedge q\Leftrightarrow \neg(p\uparrow q)\Leftrightarrow (p\uparrow q)\uparrow(p\uparrow q)$
+            
+            所以$\{\uparrow \}$是完全集。
+
+            \item $\{\downarrow \}$是完全集
+            
+            证明：由于$\neg p\Leftrightarrow (p \downarrow p),p\vee q\Leftrightarrow \neg(p\downarrow q)\Leftrightarrow (p\downarrow q)\downarrow(p\downarrow q)$
+            
+            所以$\{\uparrow \}$是完全集。
+            
+            \item 如果二元连接词$\{\Delta\}$是完全集，那么它只能是$\uparrow$或者$\downarrow$.
+            
+            证明：若$0\Delta 0\Leftrightarrow 0$或者$1\Delta 1\Leftrightarrow 1$
+            那么$\neg$不能由$\Delta$定义。所以一定有$0\Delta 0 = 1$且$1\Delta 1=0$
+
+            如果$1\Delta 0$不等于$0 \Delta 1$,则其真值表最后有2个1，真值表中有1个1的$\wedge$无法定义。
+            所以一定有$1\Delta 0 \Leftrightarrow 0\Delta 1$
+
+            若$1\Delta 0=1$，则$\Delta$是$\uparrow$
+
+            若$1\Delta 0=0$，则$\Delta$是$\downarrow$
+            
+        \end{enumerate}
+      \item 证明三元连接词$\Delta$是极小完全集，其真值表如下：
+      
+      \begin{table}[H]
+         \centering
+         \begin{tabular}{|cccc|}
+            \hline
+            $p$ & $q$ & $r$ & $\Delta(p,q,r)$ \\
+            \hline
+            0 & 0 & 0 & 1\\
+            \hline
+            0 & 0 & 0 & 1\\
+            \hline
+            0 &1& 0& 0\\
+            \hline
+            0 & 1 & 1 & 0\\ 
+            \hline
+            1 & 0 & 0 & 0\\
+            \hline
+            1 & 0 & 1 & 0\\
+            \hline
+            1 & 1 & 0 & 1\\
+            \hline
+            1 & 1 & 1 & 0\\
+            \hline
+         \end{tabular}
+      \end{table}
+      
+      证明：经过观察，$r\uparrow p\Leftrightarrow \Delta(p,p,r)$,而$\{\uparrow \}$是完全集。
+      所以$\{\Delta \}$是极小完全集。
+
+      \item 在下列公式中，哪些是析取范式，哪些是合取范式?
+      \begin{enumerate}
+         \item $p$ 析取范式
+         \item $p\vee q$ 析取范式
+         \item $(p\vee q)\wedge r$ 合取范式
+         \item $p\wedge \neg r$ 合取范式
+         \item $p \vee \neg p$ 析取范式
+         \item $(( p \vee q) \wedge \neg q) \vee r$ 不是范式
+      \end{enumerate}
+      
+      \item 在下列公式中，哪些是关于 $p, q, r$ 的主析取范式，哪些是关于 $p, q, r$ 的主合取范式？
+      \begin{enumerate}
+         \item $p \vee q \vee r$ 主合取范式
+         \item $p \wedge \neg q \wedge r$ 主析取范式
+         \item $( p \vee q \vee \neg r ) \wedge ( p \vee q \vee \neg r)$ 主合取范式
+      \end{enumerate}
+      其他的都不是$p,q,r$的主范式。
+      
+      \item 是否有这样的公式，它既是主合取范式，又是主析取范式？如果有，举出一例。
+
+      解：有，比如只含有一个命题变元的公式：$p$。
+
+      \item 求下列公式的主范式，进而判断其是否永真式、永假式、可满足式。
+      \begin{enumerate}
+         \item $ \neg p \wedge   q \rightarrow  r$
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}\neg p \wedge   q \rightarrow  r\\
+               &\Leftrightarrow \neg(\neg p \wedge q)\vee r\\
+               &\Leftrightarrow (p\vee \neg q \vee r)\text{(主合取范式)}\\
+            \end{aligned}
+         \]
+         是可满足式。
+         \item $ ( p \rightarrow  q) \rightarrow  r$
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}( p \rightarrow  q) \rightarrow  r\\
+               &\Leftrightarrow \neg(\neg p\vee q)\vee r\\
+               &\Leftrightarrow (p \wedge \neg q)\vee r\\
+               &\Leftrightarrow (p \vee r)\wedge (\neg q \vee r)\\
+               &\Leftrightarrow (p \vee r \vee (q\wedge \neg q)) \wedge (\neg q \vee r \vee (p \wedge \neg p))\\
+               &\Leftrightarrow (p \vee r \vee q) \wedge (p\vee r \vee \neg q) \wedge (\neg q \vee r \vee p)\wedge(\neg q \vee r \vee \neg p)\text{主合取范式}\\
+            \end{aligned}
+         \]
+         主合取包含三个极小式，是可满足式。
+         \item $\neg p \vee  \neg q \rightarrow  ( p \leftrightarrow  \neg q)$
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}\neg p \vee  \neg q \rightarrow  ( p \leftrightarrow  \neg q)\\
+               &\Leftrightarrow \neg (\neg p \vee \neg q)\vee (\neg p \vee \neg q) \wedge (q \vee p)\\
+               &\Leftrightarrow (p \wedge q)\vee (p \vee q)\\
+               &\Leftrightarrow p\vee q\ \text{主合取范式}
+            \end{aligned}
+         \]
+         是可满足式。
+
+         \item $p \vee  ( p \rightarrow  q \vee  (\neg q \rightarrow  r))$
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}p \vee  ( p \rightarrow  q \vee  (\neg q \rightarrow  r))\\
+               &\Leftrightarrow p\vee (\neg p \vee q \vee (q\vee r))\\
+               &\Leftrightarrow p\vee \neg p \vee q \vee r\\
+               &\Leftrightarrow (p\vee (q \wedge \neg q) \vee (r\wedge \neg r))\vee (\neg p \vee q \vee r)\\
+               &\Leftrightarrow(p\vee q \vee r)\wedge(p\vee q \vee \neg r)\wedge(p\vee \neg q \vee r)\wedge(p\vee \neg q\vee \neg r)\wedge(\neg p \vee q \vee r)\\
+            \end{aligned}
+         \]
+         是永真式。
+
+         \item $( p \rightarrow  q \wedge   r) \wedge   (\neg p \rightarrow  \neg q \wedge   \neg r)$
+         \[
+           \begin{aligned}
+               &\mathrel{\phantom{=}}( p \rightarrow  q \wedge   r) \wedge   (\neg p \rightarrow  \neg q \wedge   \neg r)\\
+               &\Leftrightarrow(\neg p \vee (q\wedge r))\wedge(p\vee (\neg q \wedge \neg r))\\
+               &\Leftrightarrow (\neg p\vee q)\wedge(\neg p \vee r)\wedge (p\vee \neg q) \wedge (p\vee \neg r)\\
+               &\Leftrightarrow(p \wedge q \wedge r)\vee (\neg p \wedge \neg q \wedge \neg r)\ \text{主析取范式}\\
+           \end{aligned} 
+         \]
+         是可满足式。
+         \item $p \wedge   q \wedge   (\neg p \vee  \neg q)$
+         \[
+           \begin{aligned}
+               &\mathrel{\phantom{=}}p \wedge   q \wedge   (\neg p \vee  \neg q)\\
+               &\Leftrightarrow (p\vee (q \wedge \neg q))\wedge (q \vee (p \wedge \neg p))\wedge (\neg p \vee \neg q)\\
+               &\Leftrightarrow (p \vee q) \wedge (p \vee \neg q) \wedge (\neg p \vee q) \wedge (\neg p \vee \neg q)\ \text{主合取范式}\\
+           \end{aligned} 
+         \]
+         是永假式。
+      \end{enumerate}
+      \item 用主范式证明下列等值式。
+      \begin{enumerate}
+         \item $( p \rightarrow  q) \rightarrow  p \wedge  q \Leftrightarrow  (\neg p \rightarrow  p) \wedge  (r \rightarrow  p)$
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}( p \rightarrow  q) \rightarrow  p\\
+               &\Leftrightarrow \neg(\neg p \vee q)\vee (p \wedge q)\\
+               &\Leftrightarrow (p\wedge \neg q)\vee(p\wedge q)\\
+               &\Leftrightarrow (p \wedge \neg q \wedge (r \vee \neg r))\vee (p \wedge q \wedge (r\vee \neg r))\\
+               &\Leftrightarrow (p \wedge \neg q \wedge r)\vee(p\wedge \neg q \wedge \neg r)\vee(p \wedge q \wedge r)\vee(p\wedge q\wedge \neg r)\\
+            \end{aligned}
+         \]
+         与此同时，有：
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}(\neg p \rightarrow  p) \wedge  (r \rightarrow  p)\\
+               &\Leftrightarrow (p\vee p)\wedge (\neg r \vee p)\\
+               &\Leftrightarrow p\wedge (p\vee \neg r)\\
+               &\Leftrightarrow p\\
+               &\Leftrightarrow p\vee(q \wedge \neg q)\vee(r\wedge \neg r)\\
+               &\Leftrightarrow (p \wedge \neg q \wedge r)\vee(p\wedge \neg q \wedge \neg r)\vee(p \wedge q \wedge r)\vee(p\wedge q\wedge \neg r)\\
+            \end{aligned}
+         \]
+         他们都等价于一个主析取范式$(p \wedge \neg q \wedge r)\vee(p\wedge \neg q \wedge \neg r)\vee(p \wedge q \wedge r)\vee(p\wedge q\wedge \neg r)$,证毕。
+         \item $( p \rightarrow  q) \wedge  ( p \rightarrow  r) \Leftrightarrow  p \rightarrow  q \wedge  r$
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}( p \rightarrow  q) \wedge  ( p \rightarrow  r)\\
+               &\Leftrightarrow (\neg p \vee q)\wedge (\neg p \vee r)\\
+            \end{aligned}
+         \]
+         与此同时，有
+         \[
+            \begin{aligned}
+               &\mathrel{\phantom{=}}p \rightarrow  q \wedge  r\\
+               &\Leftrightarrow \neg p \vee(q\wedge r)\\
+               &\Leftrightarrow (\neg p \vee q)\wedge (\neg p \vee r)\\
+            \end{aligned}
+         \]
+         他们都等价于一个主析取范式$(\neg p \vee q)\wedge (\neg p \vee r)$,证毕。
+      \end{enumerate}
+      
+      
+      
+     
+   \end{enumerate}
+   
+
+\end{document}

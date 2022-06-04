@@ -1,0 +1,111 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	tfamily,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第六次作业}
+\author{凉宫秋月}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item 给定解释I和I中赋值v如下：
+        \[
+            D_I=\{ 1,2\},a^I=1,b^I=2,f^I(1)=2,f^I(2)=1
+        \]
+        \[
+            P^I(1,1)=P^I(1,2)=1,P^I(2,1)=P^I(2,2)=0,v(x)=1,v(y)=1
+        \]
+        计算下列公式在解释I，赋值v下的真值。
+        \begin{enumerate}
+            \item $P(a, f (x)) \wedge P(x, f (b)) \wedge P( f ( y), x)$
+            \[
+                \begin{aligned}
+                    &P(a, f (x)) \wedge P(x, f (b)) \wedge P( f ( y), x)\\
+                    &=P(1,2)\wedge P(1,1) \wedge P(2,1)\\
+                    &=1\wedge 1\wedge 0\\
+                    &=0
+                \end{aligned}
+            \]
+            \item $\forall x \exists yP( y, x)$
+            \[
+                \begin{aligned}
+                    &I(\forall x \exists yP( y, x))(v)\\
+                    &=I(\exists yP(y,x))v[x/1] \wedge I(\exists yP(y,x))v[x/2]\\
+                    &=(I(P(y,x))v[y/1,x/1] \vee I(P(y,x))v[y/2,x/1])\\
+                    &\wedge (I(P(y,x))v[y/1,x/2] \vee I(P(y,x))v[y/2,x/2])\\
+                    &=(1\vee 0)\wedge (1\vee 0)\\
+                    &=1
+                \end{aligned}
+            \]
+            \item $\forall x\forall y(P(x, y) \rightarrow P( f (x), f (y)))$
+            \[
+                \begin{aligned}
+                    &I(\forall x\forall y(P(x, y) \rightarrow P( f (x), f (y))))(v)\\
+                    &=I(P(x,y)\rightarrow P(f(x),f(y)))v[x/1,y/1]\wedge I(P(x,y)\rightarrow P(f(x),f(y)))v[x/1,y/2]\\
+                    &\wedge I(P(x,y)\rightarrow P(f(x),f(y)))v[x/2,y/1] \wedge I(P(x,y)\rightarrow P(f(x),f(y)))v[x/2,y/2]\\
+                    &=0\wedge \cdots\\
+                    &=0 
+                \end{aligned}
+            \]
+        \end{enumerate}
+        
+        \item 给定解释I如下：
+        \[
+            D_I={a,b},P^I(a,a)=P^I(b,b)=1,P^I(a,b)=P^I(b,a)=0
+        \]
+        判断I是不是以下语句的模型。
+        \begin{enumerate}
+            \item $\forall x \exists yP(x,y)$  是
+            \item $\forall x \forall y P(x,y)$ 否
+            \item $\exists x \forall y P(x,y)$ 否
+            \item $\exists x \exists y \neg P(x,y)$ 是
+            \item $\forall x \forall y (P(x,y)\rightarrow P(y,x))$ 是
+            \item $\forall x P(x,x)$ 是
+        \end{enumerate}
+        \item 写出一个语句 A，使得 A 有模型，并且 A 的每个模型的论域至少有三个元素。
+        \[
+            A=\neg F(x,x) \wedge F(a,b) \wedge F(b,c) \wedge F(a,c)
+        \]
+        其中一个A的模型为：
+        \[
+            D_I=N,F(a,b)=(a\neq b),a^I=1,b^I=2,c^I=3
+        \]
+        只要解释中a,b,c是三个互不相同的数，那么A总成立，此时解释I的论域中至少包含a,b,c三个数。
+
+        \item 写出一个语句 A，使得 A 有模型，并且 A 的每个模型的论域有无穷多个元素。
+        \[
+            A=(\forall x \neg P(x,x)) \wedge (\forall x \forall y (P(x,y)\wedge P(y,z)\rightarrow P(x,z))) \wedge \forall x \exists y P(x,y)
+        \]
+        其中一个A的模型为：
+        \[
+            D_I=R,P(a,b)=(a<b)
+        \]
+        对于模型I，$\forall x_1\in D_I,\exists x_2\in D_I,P(x_1,x_2)=1$,对上述$x_2,\exists x_3,P(x_2,x_3)=1$,且由于$(\forall x \forall y (P(x,y)\wedge P(y,z)\rightarrow P(x,z)))$
+        ,$P(x_1,x_3)=1$，则有$x_1<x_2<x_3$，此过程可以不断进行。
+    \end{enumerate}
+
+
+\end{document}

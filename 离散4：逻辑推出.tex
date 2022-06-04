@@ -1,0 +1,170 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	tfamily,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第四次作业}
+\author{贠启豪 19375168}
+\date{\today}
+
+\begin{document}
+   \maketitle
+    \begin{enumerate}
+        \item 判断以下关系是否成立，并说明理由。
+        \begin{enumerate}
+            \item $p \vee  q , \neg p \models  q $
+            
+            证：由真值表
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|ccccc|}
+                    \hline
+                    $p$ & $q$ & $p\vee q$ & $\neg p$ & $q$\\
+                    \hline
+                    0 & 0 & 0 & 1 & 0\\ 
+                    \hline 
+                    0 & 1 & 1 & 1 & 1\\ 
+                    \hline
+                    1 & 0 & 1 & 0 & 0\\
+                    \hline
+                    1 & 1 & 1 & 0 & 1\\
+                    \hline
+                \end{tabular}
+            \end{table}
+            可见：对于任意使得$v(p\vee q) = v(\neg p)=1$的真值赋值v，总有$v(q)=1$成立。因此
+            $p \vee  q , \neg p \models  q $。
+            \item $p \vee  q , p \rightarrow q, q \models  p $
+            
+            不能。比如当真值赋值$v(p/0 q/1)$时，有$v(p \vee  q) = v(p \rightarrow q)= q=1$，但$v(p)=0$。
+
+            \item $p_1 \rightarrow q_1 , p_2 \rightarrow q_2 , p_1 \wedge  p_2 \models  q_1 \wedge  q_2 $
+            
+            由真值表
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|cccccccc|}
+                    \hline
+                    p1 & p2 & q1 & q2 & $p1\rightarrow q1$ & $p2\rightarrow q2$ & $p1\wedge p2$ & $q1\wedge q2$ \\
+                    \hline
+                    0 & 0 & 0 & 0 & 1 & 1 & 0 & 0\\ 
+                    \hline
+                    0 & 0 & 0 & 1 & 1 & 1 & 0 & 0\\
+                    \hline
+                    0 & 0 & 1 & 0 & 1 & 1 & 0 & 0\\
+                    \hline
+                    0 & 0 & 1 & 1 & 1 & 1 & 0 & 1\\
+                    \hline
+                    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0\\
+                    \hline
+                    0 & 1 & 0 & 1 & 1 & 1 & 0 & 0\\ 
+                    \hline
+                    0 & 1 & 1 & 0 & 1 & 0 & 0 & 0\\
+                    \hline
+                    0 & 1 & 1 & 1 & 1 & 1 & 0 & 1\\
+                    \hline
+                    1 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+                    \hline
+                    1 & 0 & 0 & 1 & 0 & 1 & 0 & 0\\
+                    \hline
+                    1 & 0 & 1 & 0 & 1 & 1 & 0 & 0\\
+                    \hline
+                    1 & 0 & 1 & 1 & 1 & 1 & 0 & 1\\
+                    \hline 
+                    1 & 1 & 0 & 0 & 0 & 0 & 1 & 0\\
+                    \hline
+                    1 & 1 & 0 & 1 & 0 & 1 & 1 & 0\\
+                    \hline
+                    1 & 1 & 1 & 0 & 1 & 0 & 1 & 0\\
+                    \hline
+                    1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+                    \hline
+                \end{tabular}
+            \end{table}
+            可见：对于任意使得$v(p1\rightarrow q1)=v(p2\rightarrow q2)=v(p1\wedge p2)=1$的真值赋值v，总有$v(q1\wedge q2)=1$成立。
+            因此原公式成立。
+            \item $p\rightarrow q , q\rightarrow  p \models  p \vee  q $
+            
+            不成立，对于真值赋值$v(p/0,q/0)$，有$v(p\rightarrow q)=v(q\rightarrow p)=1$，但$v(p\vee q)=0$.
+            
+            \item $p \wedge   q\rightarrow  r , p \vee  q\rightarrow  \neg r \models  p \wedge  q \wedge  r $
+        
+            不成立。对于真值赋值$v(p/1,q/0,r/0)$，有$v(p \wedge q\rightarrow r)=v(p \vee  q\rightarrow  \neg r)=1$,但$v(p\wedge q\wedge r)=0$.
+
+        \end{enumerate}
+        
+        \item 判断以下公式组成的集合是否可满足，并说明理由。
+        \begin{enumerate}
+            \item $( p \vee  q) \vee  (s \wedge  \neg r) , \neg (s \wedge \neg r) $
+            
+            可满足。 对于真值赋值$v(p/1,q/1,s/0,r/0)$.
+            
+            \item $p_1 , \neg p_1 \vee  p_2 , \neg p_1 \vee  \neg p_2 \vee  p_3 ,\cdots \neg p_1 \vee \cdots \neg p_n \vee  p_{n +1} ,… $
+            
+            可满足。对于真值赋值$v(p_i=1,i\in N)$.
+            
+            \item $p \vee  q , \neg p\vee  \neg q , p \rightarrow q $
+            
+            可满足。对于真值赋值$v(p/0,q/1)$.
+        \end{enumerate}
+
+        \item 设 $A,B,C$ 是任意公式。 $A \vee B \models C$ 当且仅当 $A \models C$ 且 $B \models C$ 。
+        
+        证明：
+        \[
+            \begin{aligned}
+                &\mathrel{\phantom{=}} A \vee B \models C\\
+                &\Leftrightarrow ((A\vee B)\rightarrow C )\equiv 1\\
+                &\Leftrightarrow (\neg(A \vee B)\vee C)\equiv 1\\
+                &\Leftrightarrow ((\neg A \wedge \neg B)\vee C) \equiv 1\\
+                &\Leftrightarrow ((\neg A \vee C)\wedge (\neg B \vee C))\equiv 1\\
+                &\Leftrightarrow ((A \rightarrow C) \wedge (B\rightarrow C))\equiv 1\\
+                &\Leftrightarrow (A\rightarrow C \equiv 1)\wedge (B \rightarrow C\equiv 1)\\
+                &\Leftrightarrow (A \models C) \wedge (B\models C)\\
+            \end{aligned}
+        \]
+        证毕。
+        \item 设 $\Gamma_1$ 和$\Gamma_2$ 是公式集合，$B$ 是公式， $\Gamma_2 \models   B$ ，对于$\Gamma_2$ 中每个公式 $A$， $\Gamma_1 \models   A$ 。证明： $\Gamma_1 \models   B$ 。
+        
+        证明：任意取满足$\Gamma_1$的真值赋值$v$，有$v(A)=1$,由于A的任意性，可知v可满足$\Gamma_2$。
+        又因为$\Gamma_2\models B$,故$v(B)=1$,故$\Gamma_1\models B$.
+
+        \item 设 $n$是正整数 ，$\Gamma =\{p_1\rightarrow q_1,\cdots,p_n\rightarrow q_n,p_1\vee \cdots \vee p_n\}\cup \{\neg (q_i\wedge q_j)|1\leq i<j\leq n\}$.证明 ：$\Gamma  \models   (q_1\rightarrow p_1)\wedge \cdots \wedge (q_n\rightarrow p_n)$。
+            
+        证：对于满足$\Gamma$的真值赋值$v$,由$p_1\vee \cdots p_n$得，至少存在一个$i$，使得$v(p_i)=1$。\\
+        由于$v(p_i\rightarrow q_i)=1$，故$q_i=1$.\\
+        由于$\forall 1\leq i<j\leq n,v(\neg(q_i\wedge q_j))=1$,则至多有一个j，使得$v(q_j)=1$.\\
+        故：对上述$i,j$，有：$i=j$\\
+        当$k=i=j$时，有$v(q_k\rightarrow p_k)=v(1\rightarrow 1)=1$，当$k\neq i$时，有$v(q_k \rightarrow p_k)=v(0\rightarrow 0)=1$.
+        证毕。
+
+        \item 公式集合$\Gamma $不可满足当且仅当$\Gamma \models  0$。
+        
+        证：\\
+        （不可满足$\rightarrow \Gamma \models 0$ ）:设$\Gamma \nvDash 0$，则存在$v$满足$\Gamma$且$v(0)=0$,则$\Gamma$可满足，矛盾。\\
+        （$\Gamma \models 0 \rightarrow $不可满足）:设真值赋值$v$可满足$\Gamma$，但由于$v(0)\equiv 0$，有$\Gamma \nvDash 0$，矛盾。
+    \end{enumerate}
+
+
+\end{document}

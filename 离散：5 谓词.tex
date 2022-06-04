@@ -1,0 +1,215 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	tfamily,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第五次作业}
+\author{贠启豪 19375168}
+\date{\today}
+
+\begin{document}
+   \maketitle
+   \begin{enumerate}
+       \item 将下列命题符号化：
+       \begin{enumerate}
+           \item 所有的火车都比某些汽车快。
+            \[
+                \begin{aligned}
+                    &\text{论域：交通工具}
+                    &T(x):\text{x是火车}\\
+                    &C(x):\text{x是汽车}\\
+                    &F(x,y):\text{x快于y}\\
+                    &\forall x(T(x)\rightarrow \exists y(C(y)\wedge F(x,y)))
+                \end{aligned}
+            \]
+           \item 任何金属都可以溶解在某种液体中。
+           \[
+               \begin{aligned}
+                   &\text{论域：物质}\\
+                   &M(x):\text{$x$是金属}\\
+                   &L(x):\text{$x$是液体}\\
+                   &D(x,y):\text{$x$可以溶解在$y$中}\\
+                   &\forall x(M(x)\rightarrow \exists y(L(y)\wedge D(x,y)))
+                \end{aligned}
+           \]
+           \item 至少有一种金属可以溶解在所有液体中。
+           \[
+               \begin{aligned}
+                   &\text{论域：物质}\\
+                   &M(x):\text{$x$是金属}\\
+                   &L(x):\text{$x$是液体}\\
+                   &D(x,y):\text{$x$可以溶解在$y$中}\\
+                   &\exists x(M(x)\wedge \forall y(L(y)\rightarrow D(x,y)))
+                \end{aligned}
+           \]
+           \item 每个人都有自己喜欢的职业。
+           \[
+               \begin{aligned}
+                   &\text{论域：一切}\\
+                   &H(x):\text{$x$是人}\\
+                   &J(x):\text{$x$是职业}\\
+                   &L(x,y):\text{$x$喜欢$y$}\\
+                   &\forall x(H(x)\rightarrow \exists y(J(x)\wedge L(x,y)))
+               \end{aligned}
+           \]
+           \item 有些职业是所有的人都喜欢的。
+           \[
+                \begin{aligned}
+                    &\text{论域：一切}\\
+                    &H(x):\text{$x$是人}\\
+                    &J(x):\text{$x$是职业}\\
+                    &L(x,y):\text{$x$喜欢$y$}\\
+                    &\exists x(J(x)\wedge \forall y(H(y)\rightarrow L(y,x)))
+                \end{aligned}
+            \]
+       \end{enumerate}
+
+       \item 取论域为正整数集，用函数$+$ （加法）,$\cdot$（乘法）和谓词< ， = 将下列命题符号化：
+       \[
+           \begin{aligned}
+                &a|b \Leftrightarrow \exists k(b=k\cdot a)\\
+                &x\in Odd \Leftrightarrow \neg(2|x)\Leftrightarrow \neg \exists k(x=k\cdot 2)\\
+                &x\in Even \Leftrightarrow 2|x \Leftrightarrow \exists k(x=k\cdot 2)\\
+                &x\in Prime \Leftrightarrow (x>1)\wedge (\forall u(\exists k(x=ku)\leftrightarrow(u=1 \vee u=x)))\\
+           \end{aligned}
+       \]
+       \begin{enumerate}
+           \item 没有既是奇数，又是偶数的正整数。
+           \[
+               \neg \exists x(\neg \exists k(x=k\cdot 2)) \wedge (\exists k(x=k\cdot 2))
+           \]
+           \item 任何两个正整数都有最小公倍数。
+           \[
+                \begin{aligned}
+                    &\forall x\forall y \exists z(x|z \wedge y|z \wedge (\forall u(x|u \wedge y|u \rightarrow (z<u \vee z=u))))\\
+                    &\Leftrightarrow \forall x\forall y \exists z(\exists k(z=kx) \wedge \exists k(z=ky) \wedge (\forall u\exists k(u=kx) \wedge \exists k(u=ky) \rightarrow (z<u \vee z=u))))\\
+                \end{aligned}
+           \]
+           \item 没有最大的素数。
+           \[
+               \begin{aligned}
+                   &\neg \exists x(x\in Prime \wedge \forall y(y\in Prime \rightarrow(y<x \vee y=x)))\\
+                   &\Leftrightarrow \exists x((x>1)\wedge (\forall u(\exists k(x=ku)\leftrightarrow(u=1 \vee u=x))) \wedge\\
+                   &\forall y((y>1)\wedge (\forall u(\exists k(y=ku)\leftrightarrow(u=1 \vee u=y))) \rightarrow(y<x \vee y=x)))\\
+                \end{aligned}
+           \]
+           \item 并非所有的素数都不是偶数。
+           \[
+               \begin{aligned}
+                   &\exists x(x\in Prime \wedge x\in Even)\\
+                   &\Leftrightarrow \exists x(((x>1)\wedge (\forall u(\exists k(x=ku)\leftrightarrow(u=1 \vee u=x)))) \wedge (\exists k(x=k\cdot 2)))
+               \end{aligned}
+           \]
+       \end{enumerate}
+
+       \item 取论域为实数集合，用函数+ ，－（减法）和谓词< ， = 将下列命题符号化：
+       \begin{enumerate}
+           \item 没有最大的实数。
+           \[
+               \neg \exists x(\forall y(y<x \vee y=x))
+           \]
+
+           \item 任何两不同的实数之间必有另一实数。
+           \[
+               \forall x \forall y(x<y \rightarrow \exists z(x<z<y))
+           \]
+            
+           
+           \item 函数 $f (x)$ 在点 $a$ 处连续。
+           \[
+                \begin{aligned}
+                    &\lim_{x\rightarrow a}f(x)=f(a)\\
+                    &\Leftrightarrow \forall \epsilon >0,\exists \delta,\forall x(x\in(a-\delta,a+\delta)),|f(x)-f(a)|<\epsilon
+                \end{aligned}    
+           \]
+            
+           
+           \item 函数 $f (x)$ 恰有一个根。
+           \[
+               \exists x(f(x)=0\wedge \forall y(f(y)=0\rightarrow x=y))
+           \]
+            
+           
+           \item 函数 $f (x)$ 是严格单调递增函数。
+           \[
+               \forall x\forall y(x<y\rightarrow f(x)<f(y))
+           \]
+           
+       \end{enumerate}
+       \item 指出下列公式中变元的约束出现和自由出现，并对量词的每次出现指出其辖域。
+       \begin{enumerate}
+           \item $\forall x(P(y, x) \rightarrow  P(x, a))$
+           \begin{itemize}
+               \item x:约束变元，辖域为$\forall x:P(y, x) \rightarrow  P(x, a)$
+               \item y:自由变元
+               \item a:自由变元
+           \end{itemize}
+
+           \item $\forall xP(x) \rightarrow  \forall xQ(x, y)$
+           \begin{itemize}
+               \item x:两次都是约束出现，辖域分别是$P(x)$和$Q(x,y)$(都是$\forall x$)
+               \item y：一次自由出现
+           \end{itemize}
+           
+           \item $\forall x( P(x)\wedge R(x) ) \rightarrow  \forall xP(x) \wedge  Q(x)$
+           \begin{itemize}
+               \item x:前五次是约束出现，辖域分别为$P(x)\wedge R(x)$和$P(x)$(都是$\forall x$)
+               第六次是自由出现
+           \end{itemize}
+           \item $\forall y( P(f(x, y), x) \rightarrow  \forall xP(x, g(x,y) ) )$
+           \begin{itemize}
+               \item x:前两次是自由出现，后三次是约束出现，辖域为$\forall x:P(x,g(x,y))$
+               \item y:前两次是约束出现，辖域为$\forall y:P(f(x,y),x)$，最后一次是自由出现
+           \end{itemize}
+           \item $\forall x( P(x) \rightarrow  Q(x) \wedge  \exists xR(x) ) \wedge  R(x)$
+           \begin{itemize}
+               \item x:前五次是约束出现，辖域分别为：$\forall x:P(x)\rightarrow Q(x)\wedge \exists xR(x)$,
+               $\exists x:R(x)$
+           \end{itemize}
+        \end{enumerate}
+       \item 归纳证明：若 $t,t'$是项，则 $t^x_{t'}$ 也是项。   
+       
+       证明：
+       \begin{enumerate}
+           \item 若$t$是$x$，则$t^{x}_{t'}$是$t'$，是项
+           \item 若$t$是不同于$x$的变元，或者常元，则$t^{x}_{t'}$是$t$，是项
+           \item 若$t$是$f(t1,t2,\cdots ,tn)$,则$t^{x}_{t'}$是$f((t1)^{x}_{t'},(t2)^{x}_{t'},\cdots ,(tn)^{x}_{t'})$,其中的
+           $(ti)^{x}_{t'}$都是项，所以$t$也是项，证毕。
+       \end{enumerate}
+       \item  归纳证明：若$t$是项，$A$是公式，则$A^x_t$也是公式。
+       \begin{enumerate}
+           \item 假设$A$是原子公式$P(t1,t2,\cdots ,tn)$,其中$ti$是项。则由上一问
+           知，$(ti)_t^x$是项，所以$A_t^x$是公式
+           \item 假设A是$\neg B$，其中B是原子公式。则$A_t^x$是$\neg B_t^x$，由(a)知$B_t^x$
+           是公式，所以$A_t^x$是公式
+           \item 假设A是$B\rightarrow C$，其中B、C是原子公式，则$A_t^x$是$B_t^x\rightarrow C_t^x$,由(a)知
+           $B_t^x$和$C_t^x$都是公式，所以$A_t^x$是公式
+           \item 假设A是$\forall x B$，其中B是原子公式。则$A_t^x$是$A$,是公式
+           \item 假设A是$\forall y B$，其中y是不同于x的变元，B是原子公式，则$A_t^x$是$\forall y B_t^x$，是公式
+           
+       \end{enumerate}
+    \end{enumerate}
+
+
+\end{document}

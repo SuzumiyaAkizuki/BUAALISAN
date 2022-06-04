@@ -1,0 +1,170 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5} \ttfamily ,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第十次作业}
+\author{贠启豪\\19375168}
+\date{\today}
+\newtheorem{thm}{定理}[section]
+\newtheorem{define}{定义}[section]
+\def\RR{{\mathbb{R}}}
+\def\AA{{\mathscr{A}}}
+\def\And{\wedge}
+\def\To{\rightarrow}
+\def\Or{\vee}
+\def\Not{\neg}
+
+\begin{document}
+    \maketitle
+
+    求证：
+    \begin{enumerate}
+        \item $\vdash (P\To(Q\To R))\To (Q\To (P\To R))$
+        \begin{flalign*}
+            A_1 &= (P\To (Q\To R))\To ((P\To Q)\To(P\To R)) & \AA_2\\
+            A_2 &= ((P\To Q)\To(P\To R)) \To (Q\To ((P\To Q)\To(P\To R))) & \AA_1\\
+            A_3 &= (Q\To ((P\To Q)\To(P\To R))) \To ((Q\To (P\To Q))\To (Q\To (P\To R))) &\AA_2\\
+            A_4 &= (P\To (Q\To R))\To((Q\To (P\To Q))\To (Q\To (P\To R))) & MP\\
+            A_5 &= (P\To (Q\To R))\To((Q\To (P\To Q))\To (Q\To (P\To R))) &\quad\\
+                &\To ((P\To (Q\To R))\To(Q\To (P\To Q)))\To((P\To (Q\To R))\To(Q\To (P\To R))) &\AA_2\\
+            A_6 &= ((P\To (Q\To R))\To(Q\To (P\To Q)))\To((P\To (Q\To R))\To(Q\To (P\To R))) & MP\\
+            A_7 &= Q\To (P\To Q) & \AA_1\\
+            A_8 &= (Q\To (P\To Q))\To ((P\To (Q\To R)) \To (Q\To (P\To Q))) & \AA_1\\
+            A_9 &= (P\To (Q\To R)) \To (Q\To (P\To Q)) & MP\\
+            A_{10} &= (P\To(Q\To R))\To (Q\To (P\To R)) & MP\\
+        \end{flalign*}
+
+        \item $\vdash (Q\To R)\To ((P\To Q)\To (P\To R))$
+        \begin{flalign*}
+            A_1 &= (Q\To R)\To (P\To (Q\To R)) & \AA_1\\
+            A_2 &= (P\To (Q\To R))\To ((P\To Q)\To (P\To R)) & \AA_2\\
+            A_3 &= (Q\To R)\To ((P\To Q)\To (P\To R)) & MP\\
+        \end{flalign*}
+
+        \item $\vdash (P\To Q)\To ((Q\To R)\To (P\To R))$
+        \begin{flalign*}
+            A_1 &= (Q\To R)\To ((P\To Q)\To (P\To R)) & Q_2\\
+            A_2 &= ((Q\To R)\To ((P\To Q)\To (P\To R))) &\quad \\
+                &\To ((P\To Q)\To ((Q\To R)\To (P\To R))) & Q_1\\
+            A_3 &= (P\To Q)\To ((Q\To R)\To (P\To R)) & MP\\
+        \end{flalign*}
+
+        \item $\vdash Q\To Q$
+        \begin{flalign*}
+            A_1 &= Q\To ((Q\To Q))\To Q) &\AA_1\\
+            A_2 &= (Q\To ((Q\To Q))\To Q))\To ((Q\To (Q\To Q))\To (Q\To Q)) & \AA_2\\
+            A_3 &= (Q\To (Q\To Q))\To (Q\To Q) & MP\\
+            A_4 &= Q\To (Q\To Q) & \AA_1\\
+            A_5 &= Q\To Q & MP\\
+        \end{flalign*}
+
+        \item $\vdash \neg \neg Q\To Q$
+        \begin{flalign*}
+            A_1 &= \Not \Not Q\To(\Not \Not \Not \Not Q \To \Not \Not Q) & \AA_1\\
+            A_2 &= (\Not \Not \Not \Not Q\To \Not \Not Q)\To (\Not Q\To \Not \Not \Not Q) & \AA_3\\
+            A_3 &= (\Not Q\To \Not \Not \Not Q)\To (\Not \Not Q \To Q) & \AA_3\\
+            A_4 &= (\Not \Not Q)\To (\Not \Not Q\To Q) & MP\\
+            A_5 &= ((\Not \Not Q)\To (\Not \Not Q\To Q))\\
+                &\To ((\Not \Not Q\To \Not \Not Q)\To (\Not \Not Q\To Q)) & \AA_2\\
+            A_6 &= (\Not \Not Q\To \Not \Not Q)\To (\Not \Not Q\To Q) & MP\\
+            A_7 &= \Not \Not Q\To \Not \Not Q & Q_4\\
+            A_8 &= \Not \Not Q\To Q & MP\\
+        \end{flalign*}
+
+        \item $\vdash Q\To \Not \Not Q$
+        \begin{flalign*}
+            A_1 &= (\Not \Not \Not Q \To \Not Q)\To (Q\To \Not \Not Q) & \AA_3 \\
+            A_2 &= (\Not \Not \Not Q \To \Not Q) & Q_5\\
+            A_3 &= Q\To \Not \Not Q & MP\\
+        \end{flalign*}
+
+        \item $\vdash (\Not \Not Q\To \Not \Not R)\To (Q\To R)$
+        \begin{flalign*}
+            A_1 &= (\Not \Not Q \To \Not \Not R)\To (\Not R \To \Not Q) & \AA_3\\
+            A_2 &= (\Not R \To \Not Q)\To (Q \To R) & \AA_3\\
+            A_3 &= (\Not \Not Q\To \Not \Not R)\To (Q\To R) & MP\\
+        \end{flalign*}
+
+        \item $\vdash (\Not Q\To Q)\To (R\To Q)$
+        \begin{flalign*}
+            A_1 &= \Not Q \To (\Not \Not R \To \Not Q) & \AA_1\\
+            A_2 &= (\Not \Not R \To \Not Q)\To (Q\To \Not R) & \AA_3\\
+            A_3 &= \Not Q \To (Q\To \Not R) & MP\\
+            A_4 &= (\Not Q \To (Q\To \Not R))\To ((\Not Q \To Q)\To (\Not Q \To \Not R)) & MP\\
+            A_5 &= (\Not Q \To Q)\To (\Not Q \To \Not R) & MP\\
+            A_6 &= (\Not Q\To \Not R)\To (R \To Q) & \AA_3\\
+            A_7 &= (\Not Q \To Q)\To (R\To Q) & MP\\
+        \end{flalign*}
+
+        \item $\vdash Q \To (R \Or Q)$
+        \begin{flalign*}
+            A_1 &= Q\To (\Not R \To Q) & \AA_1 \\
+            A_2 &= (\Not R \To Q)\Leftrightarrow (R\vee Q) & \text{定义}\\
+            A_3 &= Q \To (R \Or Q)\\
+        \end{flalign*}
+
+        \item $(Q\And R)\To Q$
+        \begin{flalign*}
+            A_1 &= \Not Q\To (R\To \Not Q) & \AA_1\\
+            A_2 &= (R \To \Not Q)\To (Q \To \Not R) & \AA_3 \\
+            A_3 &= \Not Q \To (Q\To \Not R) & MP\\
+            A_4 &= (\Not Q \To (Q\To \Not R))\To (\Not (Q\To \Not R)\To Q) & \AA_3 \\
+            A_5 &= \Not (Q\To \Not R)\To Q & MP\\
+            A_6 &= (Q \And R)\To Q & \text{定义}\\
+        \end{flalign*}
+
+        \item $\vdash Q\To (\Not R\To \Not (Q\To R))$
+        \begin{flalign*}
+            A_1 &= (Q\To R)\To (Q\To R) & Q_4 \\
+            A_2 &= ((Q\To R)\To (Q\To R))\To (Q \To ((Q\To R)\To R) & Q_1\\
+            A_3 &= Q \To ((Q\To R)\To R) & MP\\
+            A_4 &= ((Q\To R)\To R) \To (\Not R \To \Not (Q\To R)) & \AA_3\\
+            A_5 &= Q \To (\Not R\To \Not (Q\To R)) & MP\\
+        \end{flalign*}
+
+        \item $\vdash (P\To R)\And (Q\To S)\To (P\And Q\To R\And S)$
+
+        由演绎定理，此公式可以写成：$(P\To R)\And (Q\To S),(P\And Q)\vdash R\And S\\$
+
+        \begin{flalign*}
+            A_1 &= (P\To R)\And (Q\To S) & \Gamma \\
+            A_2 &= (P\To R)\And (Q\To S) \To (P\To R) & Q_{10}\\
+            A_3 &= P\To R & MP\\
+            A_4 &= (P\To R)\And (Q\To S) \To (Q\To S) & Q_{10}\\
+            A_5 &= Q\To S & MP\\
+            A_6 &= P\And Q & \Gamma\\
+            A_7 &= (P\And Q)\To P & Q_{10}\\
+            A_8 &= P & MP\\
+            A_9 &= (P\And Q)\To Q & Q_{10}\\
+            A_{10} &= Q & MP\\
+            A_{11} &= R & MP\\
+            A_{12} &= S & MP\\
+            A_{13} &= R\And S 
+        \end{flalign*}
+    \end{enumerate}
+    
+\end{document}

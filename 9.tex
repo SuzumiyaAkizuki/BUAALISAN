@@ -1,0 +1,165 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	\ttfamily ,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第九次作业}
+\author{贠启豪\\19375168}
+\date{2021年5月29日}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item 判断以下逻辑推论关系是否成立，并说明理由。
+        \begin{enumerate}
+            \item $\forall x(P(x) \vee  Q(x)) \models  \forall xP(x) \vee  \forall xQ(x)$
+            
+            不成立，取解释$I_1$:
+            \[
+                D_\{I_1\}={0,1},P(x)=x,Q(x)=\neg x
+            \]
+            则$I(\forall x(P(x)\vee Q(x)))(v)=1,I(\forall xP(x)\vee \forall xQ(x))(v)=0$,推论关系不成立。
+
+            \item $\exists xP(x) \wedge  \exists xQ(x) \models  \exists x(P(x) \wedge  Q(x))$
+            
+            不成立。对上述$I_1$,$I(\exists xP(x)\wedge \exists xQ(x))(v)=1$,$\exists x(P(x)\wedge Q(x))(v)=0$
+            ,推论关系不成立。
+
+            \item $\forall x(P(x) \leftrightarrow  \forall xQ(x)) \models  \forall x(P(x) \leftrightarrow  Q(x))$
+            
+            不成立。取解释$I_3$:
+            \[
+                D_{I_3}=\{0,1\},P(x)=0,Q(x)=x
+            \]
+            则$I(\forall x(P(x)\leftrightarrow \forall xQ(x)))(v)=1$,$I(\forall x(P(x)\leftrightarrow Q(x)))(v)=0$
+            ，推论关系不成立。
+            
+            \item $\forall x(P(x) \rightarrow  \forall xQ(x)) \models  \forall x(P(x) \rightarrow  Q(x))$
+            
+            成立。假如解释$I_4$使得$I(\forall x(P(x)\rightarrow Q(x)))(v)=0$,那么$\exists d\in D_{I_4},I(P(x)\rightarrow Q(x))(v[x/d])=0$，
+            即$I(P(x))(v[x/d])=1 \text{ and }I(Q(x))(v[x/d])=0$,则$I(P(x)\rightarrow \forall xQ(x))(v[x/d])=0$,推论前件为0。
+
+            
+            \item $\exists x(P(x) \rightarrow  Q(x)), \exists xP(x) \models  \exists xQ(x)$
+            
+            不成立。取解释$I_5$:
+            \[
+                D_{I_5}=\{0,1\},P(x)=x,Q(x)=0
+            \]
+            则$I(\exists x(P(x)\rightarrow Q(x)))(v)=1,I(\exists xP(x))(v)=1 \text{ and } I(\exists xQ(x))(v)=0$,
+            推论关系不成立。
+
+            \item $\exists x\exists yP(x, y) \models  \exists xP(x, x)$
+            
+            不存在。取解释$I_6$:
+            \[
+                D_{I_6}=R,P(x,y)=(x=y)
+            \]
+            则$I(\exists x\exists yP(x,y))(v)=1,I(\exists xP(x,x))(v)=0$,逻辑推论不成立。
+            
+        \end{enumerate}
+        
+        \item 设 A,B 是任意公式，证明以下结论。
+        \begin{enumerate}
+            \item $\exists x( A \wedge  B) \models  \exists xA \wedge  \exists xB$
+            
+            假设存在赋值$v$和解释$I$使得$I(\exists x(A\wedge B))(v)=1$,则：
+            \[
+                \begin{aligned}
+                    &I(\exists x(A\wedge B))(v)=1\\
+                    &\Rightarrow \exists d\in D_I,I(A\wedge B)(v[x/d])=1\\
+                    &\Rightarrow \exists d\in D_I,I(A)(v[x/d])=I(B)(v[x/d])=1\\
+                    &\Rightarrow I(\exists x A)(v)=I(\exists xB)(v)=1\\
+                    &\Rightarrow I(\exists x A\wedge \exists xB)(v)=1\\
+                \end{aligned}
+            \]
+            故推论关系成立。
+
+            \item $\forall x( A \rightarrow  B), \forall xA \models  \forall xB$
+            
+            假设存在解释$I$和赋值$v$使得$I(\forall xA)(v)=1,I(\forall xB)(v)=0$.
+            则$\exists d\in D_I,I(B)(v[x/d])=0 \text{ and } I(A)(v[x/d])=1$,则$I(A\rightarrow B)(v[x/d])=0$,
+            则$I(\forall x(A\rightarrow B))(v)=0$,故推论关系成立。
+            
+            \item  $\exists x A_x^y \models  \exists x\exists y A$ ，其中 x 对于 A 中的 y 是可代入的。
+            
+            假设解释I和赋值v使得$I(\exists x A_x^y)(v)$成立，那么有$\exists d\in D_I,I(A_x^y)(v[x/d])=1$
+            由于$I(A_x^y)(v[x/d])=I(A[x/d,y/d])=1$，所以推论成立。
+            
+            \item  $\exists x A \rightarrow  \exists xB \models  \exists x( A \rightarrow  B)$
+        
+            假设解释I和赋值v使得$I(\exists x(A\rightarrow B)$,有
+            \[
+                \begin{aligned}
+                    &I(\exists x(A\rightarrow B))(v)=0\\
+                    &\Rightarrow \forall d\in D_I, I(B)(v[x/d])=0 \text{ and }I(A)(v[x/d])=1\\
+                    &\Rightarrow I(\exists xB)(v)=0\text{ and } I(\exists xA)(v)=1
+                \end{aligned}
+            \]
+            故推论关系成立。
+        
+        \end{enumerate}
+        
+        \item 设变元 x 既不是公式 B 中的自由变元，也不是公式集 $\Gamma$ 中任何公式的自由变元，A 是公式。若$ \Gamma \cup {A} \models  B $，则$\Gamma  \cup {\exists x A} \models  B$ 。
+
+        假设解释$I$和赋值$v$满足$\Gamma\cup \{\exists xA\}$,则
+        $\exists d\in D_I,I(A)(v[x/d])=1$,显然I和v[x/d]也满足$\Gamma$，因为其中x不是自由变元。
+
+        那么I和v[x/d]满足$\Gamma \cup A$,又因为$\Gamma \cup {A} \models  B$,所以$I(B)(v[x/d])=1$，
+        又因为x不是B的自由变元，所以$I(B)(v)=1$,所以$\Gamma \cup \{\exists A\}\models B$
+
+        \item 设$\Gamma  $是公式集合，A 是公式，则$\Gamma  \models  A$ 当且仅$当\Gamma  \cup {\neg  A}$ 不可满足。
+
+        \begin{enumerate}
+            \item 假设解释I，赋值v使得$\Gamma \cup \{\neg A\}$满足，那么$I(A)(v)=0,\Gamma$不能推出A。
+            \item 假设$\Gamma $不能推导出A，那么存在解释和赋值使得$\Gamma $满足且$I(A)(v)=0$，那么$\Gamma \cup \{\neg A\}$满足
+        \end{enumerate}
+
+        \item 判断以下公式集合是否可满足，并说明理由。
+        \begin{enumerate}
+            \item $\{\neg P(t) | \text{ t是项 }\}\cup {\exists xP(x)}$
+            
+            可满足。取解释：
+            \[
+                D_I=\{0,1\},P(x)=x
+            \]
+            赋值：
+            对每个常元a有$a=1$\\
+            对每个变元x有$x=1$\\
+            对每个谓词f,$f(x_1,\cdots ,x_n)=1$\\
+            
+            \item ${\forall x \neg P(x, x), \forall x\forall y\forall z(P(x, y) \wedge  P( y, z) \rightarrow  P(x, z)), \forall x\exists yP(x, y)}$
+            可满足。取解释：
+            \[
+                D_I=R,P(x,y)=(x<y)
+            \]
+        \end{enumerate}
+
+        
+        
+        
+        
+        
+    \end{enumerate}
+\end{document}

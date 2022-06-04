@@ -1,0 +1,138 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	\ttfamily,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第八次作业}
+\author{贠启豪\\19375168}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item 判断以下等值式是否成立，并说明理由。
+        \begin{enumerate}
+            \item $\forall x(P(x) \leftrightarrow  Q(x)) \Leftrightarrow  \forall xP(x) \leftrightarrow  \forall xQ(x)$
+            
+            不成立。
+            取解释$I_1$:
+            \[
+                D_I=\{0,1\},P(x)=x,Q(x)=\neg x
+            \]
+            则$I(\forall x(P(x)\leftrightarrow Q(x)))(v)=0$,但是$I(\forall xP(x)\leftrightarrow \forall xQ(x))(v)=0\leftrightarrow 0=1$
+
+            \item $\forall x(P(x) \rightarrow  Q(x)) \Leftrightarrow  \forall xP(x) \rightarrow  \forall xQ(x)$
+            
+            不成立。取解释$I_1$,$I(\forall x(P(x)\rightarrow Q(x)))(v)=0$,但是$I(\forall xP(x)\rightarrow \forall xQ(x))(v)=0\rightarrow 0=1$.
+
+            
+            \item $\forall xP(x) \Leftrightarrow  P(x)$
+            不成立。取解释$I_3$,赋值$v_3$如下：
+            \[
+                D_{I_2}=\{0,1\},P(x)=x,v(x)=1
+            \]
+            则$I(\forall xP(X))(v)=0$,但$I(P(x))(v[x/1])=1$.
+            \item $\forall x\forall xP(x) \Leftrightarrow  \forall xP(x)$
+            
+            成立。
+
+            因为$x$不是$\forall xP(x)$的自由变元。对于每个使得$I(\forall xP(x))(v)=1$的解释$I$赋值$v$,有$\forall d\in D_I,I(\forall xP(x))(v[x/d])=1$
+            也就是$I(\forall x\forall xP(x))(v)=1$
+            
+            \item $\forall x(P(x) \leftrightarrow  \forall yQ(y)) \Leftrightarrow  \forall xP(x) \leftrightarrow  \forall yQ(y)$
+            
+            不成立。对于解释$I_1$,$I(\forall x(P(x)\rightarrow \forall yQ(y)))(v)=I(\forall x(P(x)\leftrightarrow 0))(v)=0$,但是$I(\forall xP(x)\leftrightarrow \forall yQ(y))(v)=0\rightarrow 0=1$
+            
+            \item $\forall x(P(x) \leftrightarrow  \forall yQ(y)) \Leftrightarrow  \exists xP(x) \leftrightarrow  \forall yQ(y)$
+            
+            不成立。取解释$I_6$:
+            \[
+                D_{I_6}=\{0,1\},P(x)=1,Q(x)=1
+            \]
+            则$I(\forall x(P(x)\leftrightarrow \forall yQ(y)))(v)=0$,但$I(\exists xP(x)\leftrightarrow \forall yQ(y))(v)=1\leftrightarrow1=1$.
+        
+        
+        \end{enumerate}
+        
+        \item 设 A,B 是任意公式，证明以下等值式。
+        \begin{enumerate}
+            \item $\exists xA\Leftrightarrow \exists yA^x_y$ ，其中 y 在 A 中不出现。
+            \[
+                \begin{aligned}
+                    &\exists xA\\
+                    &\Leftrightarrow \neg(\forall x\neg A)\\
+                    &\Leftrightarrow \neg(\forall y\neg A_y^x)\\
+                    &\Leftrightarrow \exists yA_y^x\\
+                \end{aligned}
+            \]
+            \item $\exists x(A\rightarrow B)\Leftrightarrow \forall xA\rightarrow \exists xB$
+            
+            对任意解释I，赋值v：
+            \[
+                \begin{aligned}
+                    &I(\forall xA\rightarrow \exists xB)(v)=0\\
+                    &\Leftrightarrow I(\forall xA)(v)=1 \text{ and } I(\exists xB)(v)=0\\
+                    &\Leftrightarrow \forall d\in D_I,I(A)(v[x/d])=1 \text{ and } \forall d\in D_I,I(B)(v[x/d])=0\\
+                    &\Leftrightarrow \forall d\in D_I,I(A\rightarrow B)(v[x/d_2])=0\\
+                    &\Leftrightarrow I(\exists (A\rightarrow B))(v)=0\\
+                \end{aligned}    
+            \]
+            \item $\forall x\forall y(A\vee B)\Leftrightarrow \forall xA\vee \forall yB$，其中 x 不是 B 的自由变元，y 不是 A 的自由变元。
+            
+            对任意解释I，赋值v：
+            \[
+                \begin{aligned}
+                    &I(\forall xA\vee \forall yB)(v)=0\\
+                    &\Leftrightarrow I(\forall xA)(v)=0\text{ and }I(\forall yB)(v)=0\\
+                    &\Leftrightarrow \forall d_1\in D_i,I(A)(v[x/d_1])=0\text{ and }\forall b_2\in D_I,I(B)(v[y/b_2])=0\\
+                    &\Leftrightarrow \forall d_1\in D_I,\forall d_2\in D_I,I(A\vee B)(v[x/d_1.y/d_2])=0\\
+                    &\Leftrightarrow I(\forall x\forall y(A\vee B))(v)=0\\
+                \end{aligned}
+            \]
+            \item $\exists x\exists y(A\wedge B)\Leftrightarrow \exists xA\wedge \exists yB$，其中 x 不是 B 的自由变元，y 不是 A 的自由变元。
+            \[
+                \begin{aligned}
+                    &\exists x\exists y(A\wedge B)\\
+                    &\Leftrightarrow \exists x(A\wedge \exists yB)\\
+                    &\Leftrightarrow \exists xA \wedge \exists yB\\
+                \end{aligned}
+            \]
+            
+            \item $\exists x\forall y(A\rightarrow B)\Leftrightarrow \forall xA\rightarrow \forall yB$，其中 x 不是 B 的自由变元，y 不是 A 的自由变元。
+            \[
+                \begin{aligned}
+                    &\exists x\forall y(A\rightarrow  B)\\
+                    &\Leftrightarrow \exists x(A\rightarrow \forall yB)\\
+                    &\Leftrightarrow \forall xA\rightarrow \forall yB\\
+                \end{aligned}
+            \]
+
+            \item $\forall x\forall yA\Leftrightarrow \forall y\forall xA$
+            
+            这也太显然了吧 真不会证明啊。
+        \end{enumerate}
+    \end{enumerate}
+
+
+\end{document}

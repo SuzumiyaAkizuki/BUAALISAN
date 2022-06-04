@@ -1,0 +1,271 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{CJKfntef}
+\usepackage{setspace}
+\usepackage{amsmath}
+\lstset{
+   basicstyle          =   \ttfamily,          % 基本代码风格
+   keywordstyle        =   \ttfamily\bfseries,          % 关键字风格
+   commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+   stringstyle         =   \ttfamily,  % 字符串风格
+   flexiblecolumns,                % 别问为什么，加上这个
+   numbers             =   left,   % 行号的位置在左边
+   showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+   numberstyle         =   \zihao{-5}	\ttfamily ,    % 行号的样式，小五号，tt等宽字体
+   showstringspaces    =   false,
+   captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+   frame               =   lrtb,   % 显示边框
+   breaklines      =   true,   % 自动换行，建议不要写太长的行
+   columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+}
+
+\title{离散数学第七次作业}
+\author{贠启豪 193775168}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item 判断以下公式是不是永真式、永假式、可满足式，并说明理由。
+        \begin{enumerate}
+            \item $ \exists xP(x)\vee \exists xQ(x)\rightarrow \exists x(P(x)\vee Q(x)) $
+            
+            永真。\\ 因为$\exists x(A \vee B)\Leftrightarrow \exists x A \vee \exists x B$且$(P\Leftrightarrow Q) \rightarrow (P\rightarrow Q)$
+            \item $ \exists xP(x)\wedge \exists xQ(x)\rightarrow \exists x(P(x)\wedge Q(x))$
+            
+            可满足。
+            
+            对于解释$I_1$:
+            \[
+                D_{I_1}=\{1\},P^{I_1}(x)=1,Q^{I_1}(x)=1
+            \]
+            $I(\exists xP(x)\wedge \exists xQ(x)\rightarrow \exists x(P(x)\wedge Q(x)))=(1\rightarrow 1)=1$.
+
+            对于解释$I_2$:
+            \[
+                D_{I_2}=\{0,1\},P^{I_2}(x)=x,Q^{I_2}(x)=\neg x
+            \]
+            $I(\exists xP(x)\wedge \exists xQ(x)\rightarrow \exists x(P(x)\wedge Q(x)))=(1\rightarrow 0)=0$.
+            \item $\forall x(P(x)\vee Q(x))\rightarrow \forall xP(x)\vee \forall xQ(x)$
+            
+            可满足。
+            
+            对上题所用的解释$I_1$,公式为真。对于上题所用的解释$I_2$，公式为假。
+
+            \item $ \forall xP(x,x)\rightarrow \forall x\forall yP(x,y)$
+            
+            可满足。
+            
+            对于解释$I_3$:
+            \[
+                D_{I_3}=R,P^{I_3}(x,y)=1
+            \]
+            $I(\forall xP(x,x)\rightarrow \forall x\forall yP(x,y))=(1\rightarrow 1)=1$
+
+            对于解释$I_4$:
+            \[
+                D_{I_4}=R,P^{I_4}(x,y)=
+                \begin{cases}
+                    1, &x=y\\
+                    0, &x\neq y\\
+                \end{cases}
+            \]
+            $I(\forall xP(x,x)\rightarrow \forall x\forall yP(x,y))=(1\rightarrow 0)=0$
+            \item $ (\forall xP(x)\rightarrow \forall xQ(x))\rightarrow \forall x(P(x)\rightarrow Q(x))$
+            
+            可满足。
+
+            对于(1)中解释$I_1,I((\forall xP(x)\rightarrow \forall xQ(x))\rightarrow \forall x(P(x)\rightarrow Q(x)))=((1\rightarrow 1)\rightarrow 1)=1$.
+
+            对于(1)中解释$I_2,I((\forall xP(x)\rightarrow \forall xQ(x))\rightarrow \forall x(P(x)\rightarrow Q(x)))=(0\rightarrow 0)\rightarrow 0=(1\rightarrow 0)=0$
+
+
+            \item $ (\exists xP(x)\rightarrow \forall xQ(x))\rightarrow \forall x(P(x)\rightarrow Q(x))$
+            
+            永真。
+
+            假设存在解释$I_5$使得$I(\forall x(P(x)\rightarrow Q(X)))=0$，则$\exists d\in D_{I_5},P(d)=1\wedge Q(d)=0$
+            则$I(\exists x P(x))=1$且$\forall xQ(x)=0,I(\exists x P(x)\rightarrow \forall xQ(x))=0$.此时原公式为真。
+
+            \item $ \forall x(P(x)\rightarrow Q(x))\rightarrow (\exists xP(x)\rightarrow \exists xQ(x))$
+            
+            永真。
+
+            假设存在解释$I_6$,$I(\exists xP(x)\rightarrow \exists xQ(x))=0$,
+            
+            则$I(\exists xP(x))=1$且$I(\exists xQ(x))=0$.
+            
+            则$I(\forall x(P(x)\rightarrow Q(x)))=0$
+            
+            则原公式永真。
+        \end{enumerate}
+
+        \item 设A1是公式A的闭包，A2是$\exists x_1 \cdots \exists x_nA$，其中$Var(A)=\{x_1,…,x_n\}$。证明：
+        \begin{enumerate}
+            \item A是永真式当且仅当A1是永真式；
+            
+            证明：
+
+            ($\rightarrow$) 设A是永真的，$x_i$是A中的一个自由变元。那么$\forall I,\forall \text{$I$中赋值}v,\forall d\in D_I$
+            有$I(A)(v[x_i/d])=1$即$I(\forall x_i A)=1$。由$x_i$的任意性，有$\forall x_1 \cdots \forall x_n A$是永真的。
+            
+            
+            ($\leftarrow$) 设$\forall x_1 \cdots \forall x_n A$永真，又因为$\forall x_1 \cdots \forall x_n A\rightarrow A$
+            ，所以$A$永真。
+
+            \item A是可满足式当且仅当A2是可满足式。
+            证明：
+
+            ($\rightarrow$) 设解释$I$和赋值$v$满足A，由于$A\rightarrow \exists x_1\cdots \exists x_n A$
+            所以解释$I$和赋值$v$满足$A2$.
+
+            ($\leftarrow$) 设解释$I$满足$A2$,有$d_1,\cdots d_n\in D_I,I(A)(\forall i,x_i/d_i)=1$。
+            取赋值$v[x_i/d_i]$即可满足A。
+        \end{enumerate}
+        
+        \item 下面谓词公式是否是永真式？是则证明之，不是，请举出反例：
+        \begin{enumerate}
+            \item $\exists x\forall yA(x,y)\leftrightarrow \forall y\exists xA(x,y)$
+            
+            不是。
+            取解释$I_5$：
+            \[
+                D_{I_5}=R,A^{I_5}=\begin{cases}
+                    1 & y=x-1\\
+                    0 & \text{others}\\
+                \end{cases}
+            \]
+            有$I(\forall y \exists xA(x,y))=1$且$\exists x \forall yA(x,y)=0$.
+
+            \item $(\exists xA(x)\rightarrow \exists xB(x))\rightarrow \exists x(A(x)\rightarrow B(x))$
+        
+            不是。取解释$I_6$:
+            \[
+                D_{I_6}=R,A(x)=(x<0),B(x)=(x>0)
+            \]
+            则$I(\exists xA(x)\rightarrow \exists xB(x))=(1 \rightarrow 1)=1$,且
+            $I(\exists x(A(x)\rightarrow B(x))=0$.
+        \end{enumerate}
+
+        \item 证明以下是永真式
+        \begin{enumerate}
+            \item $A_t^x\rightarrow \exists x A$
+            
+            证明：
+
+            取解释$I$和赋值$v$,若有$I(A_t^x)(v)=1$,则$I(A)(v[x/I(t)(v)])=1$,则$\exists xA$,故$A_t^x\rightarrow \exists xA$
+
+            \item $\neg \forall A \leftrightarrow \exists x \neg A$
+            
+            证明：
+            对于解释$I$,赋值$v$
+            \[
+                \begin{aligned}
+                    &I(\neg \forall A)(v)=1\\
+                    &\Leftrightarrow I(\forall A)(v)=0\\
+                    &\Leftrightarrow \exists d_i\in D_I,I(A)(v[x/d_i])=0\\
+                    &\Leftrightarrow \exists d_i\in D_I,I(\neg A)(v[x/d_i])=0\\
+                    &\Leftrightarrow I(\exists x \neg A)(v)=1\\
+                \end{aligned}
+            \]
+
+            \item $\neg \exists xA\leftrightarrow \forall x\neg A$
+            
+            证明：对于解释$I$，赋值$v$,有：
+            \[
+                \begin{aligned}
+                    &I(\neg \exists x A)(v)=1\\
+                    &\Leftrightarrow I(\exists x A)(v)=0\\
+                    &\Leftrightarrow \forall d_i\in D_I,I(A)(v[x/d_i])=0\\
+                    &\Leftrightarrow \forall d_i\in D_I,I(\neg A)(v[x/d_i])=1\\
+                    &\Leftrightarrow I(\forall x\neg A)(v)=1\\
+                \end{aligned}
+            \]
+            
+            \item $\exists x(A\wedge B)\rightarrow \exists xA\wedge \exists x B$
+            
+            证明：对于解释$I$，赋值$v$,有：
+            \[
+                \begin{aligned}
+                    &I(\exists x(A\wedge B))(v)=1\\
+                    &\Rightarrow \exists d_i\in D_I,I(A)(v[x/d_i])=I(B)(v[x/d_i])=1\\
+                    &\Rightarrow I(\exists xA)(v)=I(\exists xB)(v)=1\\
+                    &\Rightarrow I(\exists xA\wedge \exists xB)(v)=1
+                \end{aligned}
+            \]
+
+            \item $\forall xA \vee \forall xB\rightarrow \forall x(A\vee B)$
+            
+            假设不是永真式，则存在解释$I$,赋值$v$,$I(\forall x(A\vee B))(v)=0$且$I(\forall xA\vee \forall xB)(v)=1$.
+            \[
+                \begin{aligned}
+                    &I(\forall x(A\vee B))(v)=0\\
+                    &\Rightarrow \exists d\in D_I,I(A\vee B)(v[x/d])=0\\
+                    &\Rightarrow \exists d\in D_I,I(A)(v[x/d])=I(B)(v[x/d])=0\\
+                    &\Rightarrow I(\forall xA\vee \forall xB)(v)=0
+                \end{aligned}
+            \]
+            矛盾，假设错误。
+            
+            \item $\forall x(A\rightarrow B)\rightarrow (A\rightarrow \forall xB)$,其中x不是A的自由变元。
+            
+            假设不是永真式，则存在解释I和赋值v，使得$I(A\rightarrow \forall xB)(v)=0$且$I(\forall x(A\rightarrow B))(v)=1$.
+            
+            即$I(A)(v)=1$且$I(\forall xB)(v)=0$且$I(\forall x(A\rightarrow B))(v)=1$。
+            
+            假设对于解释I和赋值v，$I(\forall x(A\rightarrow B))(v)=I(A)(v)=1$,则$\forall d\in D_I,I(A\rightarrow B)(v[x/d])=1$
+            由于$I(A)(v)=I(A)(v[x/d])=1$，所以$I(B)(v[x/d])=1$,矛盾，假设错误。
+            
+        \end{enumerate}
+        
+        \item 下面公式是否是永真式？说明理由。
+        \begin{enumerate}
+            \item $(A\rightarrow \exists xB(x))\leftrightarrow \exists x(A\rightarrow B(x))$
+            
+            是永真的。
+            \[
+                \begin{aligned}
+                    &\exists x(A\rightarrow B(x))\\
+                    &\Leftrightarrow \exists x(\neg B(x)\rightarrow \neg A)\\
+                    &\Leftrightarrow \forall x\neg B(x)\rightarrow \neg A\\
+                    &\Leftrightarrow \neg \neg A\rightarrow \neg \forall x \neg B\\
+                    &\Leftrightarrow A\rightarrow \exists xB(x)\\
+                \end{aligned}
+            \]
+            
+            \item $\exists x(A(x)\rightarrow B(x))\leftrightarrow (\forall xA(x)\rightarrow \exists xB(x)$)
+            
+            永真。
+            \[
+                \begin{aligned}
+                    &I(\exists x(A\rightarrow B))(v)=0\\
+                    &\Leftrightarrow \forall d\in D_I,I(A(x))(v[x/d])=1 \text{ and } I(B)(v[x/d])=0\\
+                    &\Leftrightarrow I(\forall xA)(v)=1 \text{ and } I(\exists xB)(v)=0\\
+                    &\Leftrightarrow I(\forall xA\rightarrow \exists xB)(v)=0
+                \end{aligned}
+            \]
+            
+            \item $\forall x(A(x)\wedge B(x))\leftrightarrow \forall xA(x)\wedge \forall xB(x)$
+            
+            永真。
+            \[
+                \begin{aligned}
+                    &I(\forall x(A(x)\wedge B(x)))=0\\
+                    &\Leftrightarrow \exists d\in D_I,I(A\wedge B)(v[x/d])=0\\
+                    &\Leftrightarrow \exists d\in D_I,I(A)(v[x/d])=0 \text{ or } I(B)(v[x/d])=0\\
+                    &\Leftrightarrow I(\forall xA)(v)=0 \text{or} I(\forall xB)(v)=0\\
+                    &\Leftrightarrow I(\forall xA\wedge \forall xB)(v)=0
+                \end{aligned}
+            \]
+        \end{enumerate}
+        
+        
+    \end{enumerate}
+
+
+\end{document}
